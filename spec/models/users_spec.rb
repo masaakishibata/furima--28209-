@@ -1,18 +1,18 @@
 require 'rails_helper'
 
-RSpec.describe UserDonation, type: :model do
-  describe '寄付情報の保存' do
+RSpec.describe User, type: :model do
+  describe 'ユーザー管理機能' do
     before do
-      @user_donation = FactoryBot.build(:user_donation)
+      @user = FactoryBot.build(:user)
     end
 
     it 'すべての値が正しく入力されていれば保存できること' do
-      expect(@user_donation).to be_valid
+      expect(@user).to be_valid
     end
     it 'nameが空だと保存できないこと' do
-      @user_donation.name = nil
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Name can't be blank")
+      @user.name = nil
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name can't be blank")
     end
     it 'nameが全角日本語でないと保存できないこと' do
       @user_donation.name = "suzuki"

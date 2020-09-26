@@ -4,20 +4,25 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  before_save { self.email = email.downcase }
+  name = / \ A [ぁ-んァ-ン一-龥] /
+  katakana = / \ A [ァ-ヶー－] + \ z /
+  password = / \ A [a-zA-Z] + \ z /
+  year_month_day = /\A\d{4}-\d{2}-\d{2}\z/
+  email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
-  validates :name, presence: true
 
+  validates :email, uniqueness: true, format: { with: email }
+
+  validates :last_name, presence: true, format: { with: name }
+
+  validates :last_name_kana, presence: true, format: { with: katakana }
+
+  validates :family_name, presence: true, format: { with: name }
+
+  validates :family_name_kana, presence: true, format: { with: katakana }
   
-  VALID_USER_NAME_REGEX = /\A[ぁ-んァ-ン一-龥]/
-  validates :last_name, :first_name, presence: true, format: { with: VALID_USER_NAME_REGEX,
-    message: "全角（漢字・ひらがな・カタカナ）を使し入力してください" }
+  validates :password, presence: true, length: { minimum: 6 }, format: { with: password }
 
+  validates :birthday, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2}\z/ }
 
-
-  validates :password, confirmation: true
-  VALID_PASSWORD_REGEX =/\A(?=.*?[a-z])(?=.*?[\d])\w{6}\z/
-  validates :password, presence: true,
-            format: { with: VALID_PASSWORD_REGEX,
-             message: "は半角6文字・英小文字・数字それぞれ１文字以上含む必要があります"}
 end

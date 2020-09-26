@@ -1,13 +1,10 @@
 FactoryBot.define do
-  factory :users do
-    name { '鈴木' }
-    name_reading { 'スズキ' }
-    nickname { 'suzuki' }
-    postal_code { '123-4567' }
-    prefecture { 1 }
-    city { '東京都' }
-    house_number { '1-1' }
-    building_name { '東京ハイツ' }
-    price { 2000 }
+  factory :user do
+    name {Faker::Name.last_name.last_name_kana.family_name.family_name_kana}
+    email {Faker::Internet.free_email}
+    password = Faker::Internet.password(min_length: 6)
+    password {password}
+    password_confirmation {password}
+    birthday {Faker::Internet.year.month.day}
   end
 end
