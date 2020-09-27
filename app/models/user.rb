@@ -4,18 +4,18 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  name = / \ A [ぁ-んァ-ン一-龥] /
-  katakana = / \ A [ァ-ヶー－] + \ z /
-  password = / \ A [a-zA-Z] + \ z /
+  name = /\A[ぁ-んァ-ン一-龥] /
+  katakana = /\ A [ァ-ヶー－] + \ z /
+  password = /\ A [a-zA-Z0-9] + \ z /
   year_month_day = /\A\d{4}-\d{2}-\d{2}\z/
   email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
 
   validates :email, uniqueness: true, format: { with: email }
 
-  validates :last_name, presence: true, format: { with: name }
+  validates :first_name, presence: true, format: { with: name }
 
-  validates :last_name_kana, presence: true, format: { with: katakana }
+  validates :first_name_kana, presence: true, format: { with: katakana }
 
   validates :family_name, presence: true, format: { with: name }
 
@@ -23,6 +23,6 @@ class User < ApplicationRecord
   
   validates :password, presence: true, length: { minimum: 6 }, format: { with: password }
 
-  validates :birthday, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2}\z/ }
+  validates :birthday, presence: true, format: { with: year_month_day }
 
 end

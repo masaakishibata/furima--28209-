@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe 'ユーザー管理機能' do
+  describe '#create' do
     before do
       @user = FactoryBot.build(:user)
     end
@@ -9,82 +9,89 @@ RSpec.describe User, type: :model do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@user).to be_valid
     end
-    it 'nameが空だと保存できないこと' do
-      @user.name = nil
+    it 'nicknameが空だと保存できないこと' do
+      @user.nickname = ""
       @user.valid?
       expect(@user.errors.full_messages).to include("Name can't be blank")
     end
-    it 'nameが全角日本語でないと保存できないこと' do
-      @user_donation.name = "suzuki"
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Name is invalid. Input full-width characters.")
+    it 'ユーザー本名が、名字と名前がそれぞれ必須であること' do
+      @user.first_name = ""
+      @user.family_name = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name is invalid. Input full-width characters.")
     end
-    it 'name_readingが空だと保存できないこと' do
-      @user_donation.name_reading = nil
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Name reading can't be blank")
+    it 'ユーザー本名は全角（漢字・ひらがな・カタカナ）で入力しないと保存できない' do
+      @user.last_name = "/ \ A [ぁ-んァ-ン一-龥] /"
+      @user.family_name = "/ \ A [ぁ-んァ-ン一-龥] /"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name is invalid. Input full-width / \ A [ぁ-んァ-ン一-龥] / characters.")
     end
-    it 'name_readingが全角日本語でないと保存できないこと' do
-      @user_donation.name_reading = "ｽｽﾞｷ"
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Name reading is invalid. Input full-width katakana characters.")
+    it 'first_name_kana_readingが空だと保存できないこと' do
+      @user.first_name_kana_reading = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name reading can't be blank")
     end
-    it 'nicknameが空だと保存できないこと' do
-      @user_donation.nickname = nil
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Nickname can't be blank")
+    it 'family_name_kana_readingが空だと保存できないこと' do
+      @user.family_name_kana_reading = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name reading can't be blank")
     end
-    it 'nicknameが半角でないと保存できないこと' do
-      @user_donation.nickname = "すずき"
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Nickname is invalid. Input half-width characters.")
+    it 'first_name_kana_readingが全角（カタカナ）でないと保存できないこと' do
+      @user.first_name_kana_reading = " / \ A [ァ-ヶー－] + \ z /"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name reading is invalid. Input full-width katakana characters.")
     end
-    it 'postal_codeが空だと保存できないこと' do
-      @user_donation.postal_code = nil
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Postal code can't be blank")
+    it 'family_name_kana_readingが全角（カタカナ）でないと保存できないこと' do
+      @user.last_name_kana_reading = " / \ A [ァ-ヶー－] + \ z /"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Name reading is invalid. Input full-width katakana characters.")
     end
-    it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
-      @user_donation.postal_code = '1234567'
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Postal code is invalid. Include hyphen(-)")
+    it '生年月日が必須で入力がないと保存できない' do
+      @user.birthday = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birthday reading is invalid. Input full-width /\A\d{4}-\d{2}-\d{2}\z/ characters.")
     end
-    it 'prefectureを選択していないと保存できないこと' do
-      @user_donation.prefecture = 0
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Prefecture can't be blank")
+    it 'メールアドレスが必須であること' do
+      @user.email = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email can't be blank")
     end
-    it 'cityは空でも保存できること' do
-      @user_donation.city = nil
-      expect(@user_donation).to be_valid
+    it "重複したemailが存在する場合登録できない" do
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.vaild?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
-    it 'house_numberは空でも保存できること' do
-      @user_donation.house_number = nil
-      expect(@user_donation).to be_valid
+    it 'メールアドレスは@を含む必要があること' do
+      @user.email = "/\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i"
+      @user.valid?
+      expect(@user_donation.errors.full_messages).to include("Email reading is invalid. Input full-width /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i characters.")
     end
-    it 'building_nameは空でも保存できること' do
-      @user_donation.building_name = nil
-      expect(@user_donation).to be_valid
+    it 'パスワードが必須であること' do
+      @user.password = ""
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password can't be blank")
     end
-    it 'priceが空だと保存できないこと' do
-      @user_donation.price = nil
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Price can't be blank")
+    it "passwordが6文字でなければ登録できない" do
+      @user.password = "000000"
+      @user.password_confirmation = "000000"
+      @user.vaild?
+      expect(@user.errors.full_messages).to include("password is too short (minimum is 6 characters)")
     end
-    it 'priceが全角数字だと保存できないこと' do
-      @user_donation.price = '２０００'
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+    it "passwordが存在してもpassword_confirmationが空では登録ができない" do
+      @user.password_confirmation = ""
+      @user.vaild?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    it 'priceが1円未満では保存できないこと' do
-      @user_donation.price = 0
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Price is out of setting range")
+    it 'パスワードは半角英数字混合であること' do
+      @user.password = " / \ A [a-zA-Z] + \ z /"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password reading is invalid. Input full-width / \ A [a-zA-Z] + \ z / characters.")
     end
-    it 'priceが1,000,000円を超過すると保存できないこと' do
-      @user_donation.price = 1000001
-      @user_donation.valid?
-      expect(@user_donation.errors.full_messages).to include("Price is out of setting range")
+    it 'エラーが表示されること' do
+      post user_registration_path, params: { user: invalid_user_params }
+      expect(response.body).to include('prohibited this user from being saved')
     end
   end
 end
