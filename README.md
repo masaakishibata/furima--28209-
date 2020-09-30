@@ -35,7 +35,7 @@ Things you may want to cover:
 | first_name_kana  | string | null: false             |
 | family_name      | string | null: false             |
 | family_name_kana | string | null: false             |
-| birthday         | DATE   | null: false             |
+| birthday         | date   | null: false             |
 
 ### Association
 
@@ -45,19 +45,19 @@ Things you may want to cover:
 
 ## items テーブル
 
-| Column              | Type       | Options                        |
-| --------------------| ---------- | ------------------------------ |
-| item_name           | string     | null: false                    |
-| description_of_item | string     | null: false                    |
-| item_status         | string     | null: false                    |
-| category            | string     | null: false                    |
-| price               | string     | null: false                    |
-| delivery_charge     | string     | null: false                    |
-| seller              | string     | null: false                    |
-| image               | string     | null: false                    |
-| shipment_source     | string     | null: false                    |
-| transport_days      | datetime   | null: false                    |
-| user_id             | references | null: false, foreign_key: true |
+| Column              | Type        | Options                        |
+| --------------------| ----------- | ------------------------------ |
+| name                | string      | null: false                    |
+| description         | string      | null: false                    |
+| seller              | string      | null: false                    |
+| image               | string      | null: false                    |
+| price               | string      | null: false                    |
+| item_status         | integer     | null: false                    |
+| category            | integer     | null: false                    |
+| delivery_charge     | integer     | null: false                    |
+| shipment_source     | integer     | null: false                    |
+| transport_days      | integer     | null: false                    |
+| user_id             | references  | null: false, foreign_key: true |
 
 ### Association
 
@@ -86,16 +86,14 @@ Things you may want to cover:
 | Column                  | Type       | Options                        |
 | ----------------------- | ---------- | ------------------------------ |
 | user_id                 | references | null: false, foreign_key: true |
-| order_history           | datetime   | null: false                    |
-| order_cancellation      | datetime   | null: false                    |
-| order_completed         | datetime   | null: false                    |
+| item_id                 | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
 - has_many :items, through: order_items
 - has_one :orders_information
-- has_one :credit_card
+
 
 
 ## orders_information テーブル
@@ -115,21 +113,3 @@ Things you may want to cover:
 
 
 
-## credit_card テーブル
-
-| Column                  | Type       | Options                        |
-| ----------------------- | ---------- | ------------------------------ |
-| credit_card_number      | string     | null: false                    |
-| expire_year             | DATE       | null: false                    |
-| expire_month            | DATE       | null: false                    |
-| security_code           | string     | null: false                    |
-| first_name              | string     | null: false                    |
-| first_name_kana         | string     | null: false                    |
-| family_name             | string     | null: false                    |
-| family_name_kana        | string     | null: false                    |
-| birthday                | DATE       | null: false                    |
-| order_id                | references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :order
