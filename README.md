@@ -66,7 +66,7 @@ Things you may want to cover:
 
 
 
-<!-- ordersが成立して初めて決定する情報は、items自体が保持すべきではない -->
+
 
 ## order_items テーブル
 
