@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  name = /\A[ぁ-んァ-ン一-龥] /
-  katakana = /\ A [ァ-ヶー－] + \ z /
-  password = /\ A [a-zA-Z0-9] + \ z /
+  name = /\A[ぁ-んァ-ン一-龥] \ Z /
+  katakana = /\ A [ァ-ヶー－] + \ Z /
+  password = /\ A [a-z0-9] + \ z /
   year_month_day = /\A\d{4}-\d{2}-\d{2}\z/
   email = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
