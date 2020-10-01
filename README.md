@@ -41,7 +41,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :items through: user_items
-- has_many :user_items
+- has_many :items
 
 
 ## items テーブル
@@ -49,8 +49,7 @@ Things you may want to cover:
 | Column              | Type        | Options                        |
 | --------------------| ----------- | ------------------------------ |
 | name                | string      | null: false                    |
-| description         | string      | null: false                    |
-| image_id            | integer     | null: false                    |
+| description         | text        | null: false                    |
 | price_id            | integer     | null: false                    |
 | status_id           | integer     | null: false                    |
 | category_id         | integer     | null: false                    |
@@ -62,8 +61,7 @@ Things you may want to cover:
 ### Association
 
 
-- has_many :users, through: user_items
-- belong_to :user_items
+- has_one :user_items
 
 
 
@@ -86,9 +84,9 @@ Things you may want to cover:
 
 | Column                 | Type        | Options                        |
 | ---------------------- | ----------- | ------------------------------ |
-| shipping_address       | string      | null: false                    |
+| building_number        | string      | null: false                    |
 | postal_code            | string      | null: false                    |
-| prefectures            | string      | null: false                    |
+| prefectures            | integer     | null: false                    |
 | municipality           | string      | null: false                    |
 | phone_number           | string      | null: false                    |
 | user_items             | references  | null: false, foreign_key: true |
