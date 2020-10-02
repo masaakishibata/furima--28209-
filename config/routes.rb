@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   devise_for :user
-  post 'sessions#create'
+  # post 'sessions#create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
