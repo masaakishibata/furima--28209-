@@ -83,8 +83,8 @@ Things you may want to cover:
 
 | Column                 | Type        | Options                        |
 | ---------------------- | ----------- | ------------------------------ |
-| building_number_id     | integer     |                                |
-| postal_code_id         | string      | null: false                    |
+| building_number        | string      |                                |
+| postal_code            | string      | null: false                    |
 | prefectures_id         | integer     | null: false                    |
 | municipality           | string      | null: false                    |
 | phone_number           | string      | null: false                    |
