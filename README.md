@@ -61,8 +61,8 @@ Things you may want to cover:
 ### Association
 
 
-- has_one :user_items
-- belong_to :users
+- has_one :user_item
+- belong_to :user
 
 
 ## user_items テーブル
@@ -83,8 +83,8 @@ Things you may want to cover:
 
 | Column                 | Type        | Options                        |
 | ---------------------- | ----------- | ------------------------------ |
-| building_number_id     | integer     | null: false                    |
-| postal_code_id         | integer     | null: false                    |
+| building_number_id     | integer     |                                |
+| postal_code_id         | string      | null: false                    |
 | prefectures_id         | integer     | null: false                    |
 | municipality           | string      | null: false                    |
 | phone_number           | string      | null: false                    |
@@ -94,7 +94,7 @@ Things you may want to cover:
 
 ### Association
 
-- belongs_to :user_items
+- belongs_to :user_item
 
 
 
