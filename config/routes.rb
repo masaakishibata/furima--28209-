@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  devise_for :user
-  # post 'sessions#create'
+  devise_for :users
+  root to: 'items#index'
+  # root to: 'users#get'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
