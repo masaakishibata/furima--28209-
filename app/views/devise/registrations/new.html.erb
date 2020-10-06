@@ -1,5 +1,5 @@
 <%# 「モデル名」にはUserモデルであれば@userを渡しましょう。「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
-<%= form_with model: @user, url: 'user#post', id: 'new_user', class: 'registration-main', local: true do |f| %>
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'registration-main', local: true do |f| %>
 <%# //「モデル名」にはUserモデルであれば@userを渡しましょう。「新規登録機能へのパス」は、devise導入後にrails routesを実行してdevise/registrations#createへのパスを確認し、記載してください。 %>
 <div class='form-wrap'>
   <div class='form-header'>
@@ -9,7 +9,7 @@
   </div>
 
   <%# インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
-  <%# render 'shared/error_messages', model: f.object %>
+  <%= render 'shared/error_messages', model: f.object %>
   <%# //インスタンスを渡して、エラー発生時にメッセージが表示されるようにしましょう。%>
 
   <div class="form-group">
@@ -81,7 +81,7 @@
                     class:'select-birth',
                     id:"birth-date",
                     use_month_numbers: true,
-                    prompt: => select_date,
+                    prompt: '--',
                     start_year: 1930,
                     end_year: (Time.now.year - 5),
                     date_separator: '%s'),

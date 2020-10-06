@@ -69,5 +69,4 @@ gem 'devise'
 
 gem 'rubocop'
 gem 'rubocop-rails'
-gem 'romaji'
 gem 'active_hash'
