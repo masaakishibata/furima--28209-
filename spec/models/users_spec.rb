@@ -64,10 +64,11 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
-    it 'email一意性テスト' do
-      @user.email = ":uniqueness true"
-      @user.valid?
-      expect(@user.errors.full_messages).to include("Email is invalid")
+    it "重複したemailが存在する場合登録できないこと" do
+      @user.save
+      another_user = FactoryBot.build(:user, email: @user.email)
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
     end
     it "passwordが6文字以上でなければ登録できない" do
       @user.password_confirmation = "00000"
@@ -79,8 +80,13 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    it 'パスワードは半角英数字混合であること' do
-      @user.password = "/\A[a-z0-9]+\z/"
+    it 'パスワードは半角英字混合であること' do
+      @user.password = "/\A[a-zA-Z]+\z/"
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Password reading is invalid. Input full-width characters")
+    end
+    it 'パスワードは半角数字混合であること' do
+      @user.password = "/\A[0-9]+\z/"
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Password reading is invalid. Input full-width characters")
     end
