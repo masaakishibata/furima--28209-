@@ -8,8 +8,8 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @item = Item.new
   end
-
 
   private
 
@@ -22,5 +22,5 @@ class ItemsController < ApplicationController
       redirect_to action: :index
     end
   end
-  
+
 end
