@@ -80,15 +80,15 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    it 'パスワードは半角英字混合であること' do
-      @user.password = "/\A[a-zA-Z]+\z/"
+    it '数字のみでは登録できない' do
+      @user.password = "111111"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Password reading is invalid. Input full-width characters")
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
-    it 'パスワードは半角数字混合であること' do
-      @user.password = "/\A[0-9]+\z/"
+    it '英字のみでは登録できない' do
+      @user.password = "aaaaaa"
       @user.valid?
-      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password", "Password Password reading is invalid. Input full-width characters")
+      expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
   end
 end
