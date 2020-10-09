@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :status
   belongs_to_active_hash :category
@@ -10,16 +9,20 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  # with_options presence: true do
-  #   validates :name
-  #   validates :description
-  #   validates :price, length: {minimum: 300, maximum: 9,999,999}
-  #   with_options format: { with: :title, :text }
-  #     validates :status_id, numericality: { other_than: 1 }
-  #     validates :category_id, numericality: { other_than: 1 }
-  #     validates :delivery_charge_id, numericality: { other_than: 1 }
-  #     validates :shipment_source_id, numericality: { other_than: 1 }
-  #     validates :transport_days_id, numericality: { other_than: 1 }
-  #   end
-  # end
+  with_options presence: true do
+    validates :name
+    validates :description
+    validates :price
+  end
+  validates :price, numericality: { minimum: 300} 
+  validates :price, numericality: { maximum: 9_999_999 } 
+
+  with_options numericality: { other_than: 1 } do
+    validates :status_id
+    validates :category_id
+    validates :delivery_charge_id
+    validates :shipment_source_id
+    validates :transport_days_id
+  end
+  
 end
