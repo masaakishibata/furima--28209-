@@ -6,8 +6,9 @@ function PriceInput () {
 
   PriceInput.addEventListener('keyup', function(){
     console.log('OK')
-    const input = value
-    input = Math.ceil `${item_price * 0,1}`
+    const input = fee function () {
+    Math.ceil `${item_price * 0,1}`
+    }
     // const input = Math.ceil("item-price * 0,9")
 
     // ItemPrice.on("add-tax-price", 
