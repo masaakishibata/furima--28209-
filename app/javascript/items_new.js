@@ -5,20 +5,23 @@ function PriceInput () {
   const PriceProfit = document.getElementById("profit")
 
   PriceInput.addEventListener('keyup', function(){
-    console.log('OK')
-    const input = fee function () {
-    Math.ceil `${item_price * 0,1}`
-    }
-    // const input = Math.ceil("item-price * 0,9")
-
-    // ItemPrice.on("add-tax-price", 
+    const fee = document.getElementById("add-tax-price")
+    const input = document.getElementById("profit")
   })
-  // let tax = Math.ceil
-
-  // PriceContent.addEventListener('keyup', function(){
-  //   this.setAttribute("profit", vul("item-price * 0,9"))
-  // })
-  // let 
-  
+  document.getElementById("add-tax-price", function(){
+    addEventListener( `${item-price * 0.1} = ${add-tax-price}`({
+      }))
+  })
+  console.log('OK')
 }
+      //  
+    // 
+    //  function () {
+    //  
+    // }
+    //() Math.ceil("item-price * 0,9"))
+   // ('keyup', function(){
+   //("profit",Math.ceil("item-price * 0,9")
+  
+
 window.addEventListener('load', PriceInput)
