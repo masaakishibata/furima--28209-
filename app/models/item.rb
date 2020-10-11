@@ -14,8 +14,11 @@ class Item < ApplicationRecord
     validates :description
     validates :price
   end
-  validates :price, numericality: { minimum: 300} 
-  validates :price, numericality: { maximum: 9_999_999 } 
+
+  with_options format: { with: /\A[0-9]+\z/, message: 'Price reading is invalid. Input full-width items' } do
+    validates :price, numericality: { minimum: 300} 
+    validates :price, numericality: { maximum: 9_999_999 } 
+  end
 
   with_options numericality: { other_than: 1 } do
     validates :status_id
