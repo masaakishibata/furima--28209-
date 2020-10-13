@@ -1,17 +1,19 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index]
 
+
   def index
     @items = Item.order("created_at DESC")
   end
-  
+
   def new
     @item = Item.new
   end
   
   def create
     @item = Item.new(item_params)     
-    if @item.save
+    if @item.valid?
+      @item.save
       redirect_to root_path
     else
       render :new
