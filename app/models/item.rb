@@ -17,8 +17,8 @@ class Item < ApplicationRecord
   end
 
   with_options format: { with: /\A[0-9]+\z/, message: "Price can't be blank" } do
-    validates :price, numericality: { minimum: 300} 
-    validates :price, numericality: { maximum: 9_999_999 } 
+    validates :price
+    validates_inclusion_of :price, in: 300..999999
   end
 
   with_options numericality: { other_than: 1 } do
