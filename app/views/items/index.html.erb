@@ -114,12 +114,12 @@
 
   <div class='item-contents'>  <%# 商品がある場合は表示されないようにしましょう %>
     <h2 class='title'>ピックアップカテゴリー</h2>
-    <%= link_to '新規投稿商品', "items#new", class: "subtitle" %>
+    <%= link_to '新規投稿商品', "#", class: "subtitle" %>
     <ul class='item-lists'>
     <% if @items.length > 0 %>
       <% @items.each do |item| %>
         <li class='list'>
-          <%= link_to items_path(item) do %>
+          <%= link_to item_path(item) do %>
             <div class='item-img-content'>
               <%= image_tag item.image, class: "item-img" %>
               <%# 商品が売れていればsold outを表示しましょう %>
