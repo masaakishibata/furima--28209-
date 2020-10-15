@@ -23,13 +23,13 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
-  def edit
-  end
+  # def edit
+  # end
 
-  def destroy
-    @item = Item.find(params[:id])
-    item.destroy
-  end
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   item.destroy
+  # end
   private
 
   def item_params
