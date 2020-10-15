@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :move_to_index, except: [:index]
+  before_action :move_to_index, except: [:index, :show]
 
   def index
     @items = Item.order("created_at DESC")
@@ -20,8 +20,16 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @item = Item.find(params[:id])
   end
 
+  # def edit
+  # end
+
+  # def destroy
+  #   @item = Item.find(params[:id])
+  #   item.destroy
+  # end
   private
 
   def item_params
@@ -41,6 +49,13 @@ class ItemsController < ApplicationController
   def move_to_index
     unless user_signed_in?
       redirect_to action: :index
+    end
+  end
+
+  def ensure_current_user
+    @item = Item.find(params[:id])
+    if item_user_id != current_user.id
+      redirect_to action: :show
     end
   end
 
