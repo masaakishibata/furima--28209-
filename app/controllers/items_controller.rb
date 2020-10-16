@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-
+  before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user]
+  before_action :ensure_current_user, only: [:edit]
   def index
     @items = Item.order("created_at DESC")
   end
@@ -20,18 +21,27 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
-  # def edit
-  # end
+  def edit
+  end
 
   # def destroy
   #   @item = Item.find(params[:id])
   #   item.destroy
   # end
-  private
 
+  def update
+    if @item.update(item_params)
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
+  
+  private
+  
   def item_params
     params.require(:item).permit(
       :image,
@@ -53,10 +63,13 @@ class ItemsController < ApplicationController
   end
 
   def ensure_current_user
-    @item = Item.find(params[:id])
-    if item_user_id != current_user.id
+    if user_signed_in? && @item.user_id != current_user.id
       redirect_to action: :show
     end
+  end
+
+  def item_find
+    @item = Item.find(params[:id])
   end
 
 end
