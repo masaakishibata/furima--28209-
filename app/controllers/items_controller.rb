@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :move_to_index, except: [:index, :show]
-  before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user]
+  before_action :item_find, only: [:create, :show, :edit, :update, :destroy, :ensure_current_user]
   before_action :ensure_current_user, only: [:edit]
   def index
     @items = Item.order("created_at DESC")
@@ -26,10 +26,13 @@ class ItemsController < ApplicationController
   def edit
   end
 
-  # def destroy
-  #   @item = Item.find(params[:id])
-  #   item.destroy
-  # end
+  def destroy
+    if @item.destroy(item_params)
+      redirect_to root_path
+    else
+      render :show
+    end
+  end
 
   def update
     if @item.update(item_params)
