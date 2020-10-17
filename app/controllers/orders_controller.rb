@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   before_action :new_order, only: [:index, :new]
   before_action :item_find, only: [:index]
+  before_action :order_create, only: [:create]
 
   def index
   end
@@ -10,13 +11,6 @@ class OrdersController < ApplicationController
 
   def create
     @order = Orders.new(order_params)
-    if @order.valid?
-      pay_item
-      @orders.save
-      redirect_to item_orders_path(@item.id)
-    else
-      render action: :index
-    end
   end
 
   private
@@ -39,7 +33,7 @@ class OrdersController < ApplicationController
   def pay_item
     Payjs.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjs.Charge.create(
-      amount: order_params(@item.price),
+      amount: order_params(:item_id),
       card: order_params[:tokne],
       currency: 'jpy')
   end
@@ -50,6 +44,16 @@ class OrdersController < ApplicationController
 
   def new_order
     @order = Orders.new
+  end
+
+  def order_create
+    if @order.valid?
+      pay_item
+      @orders.save
+      redirect_to item_orders_path(@item.id)
+    else
+      render action: :index
+    end
   end
 
 end
