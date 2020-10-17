@@ -1,15 +1,17 @@
 class OrdersController < ApplicationController
 
   def index
+    @item = Item.find(params[:id])
   end
 
   def new
-    @orders = Order.new
+    @order = Order.new
   end
 
   def create
-    @orders = Order.new(order_params)
-    if @orders.valid?
+    @order = Order.new(order_params)
+    if @order.valid?
+      pay_item
       @orders.save
       redirect_to action: :index
     else
@@ -20,7 +22,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:@orders).permit(
+    params.require(:order).permit(
       :prefectures_id,
       :municipality,
       :building_number,
@@ -31,7 +33,17 @@ class OrdersController < ApplicationController
       :user_id,
       :item_id,
       :user_items_id,
-      current_user.id
+      current_user.id,
+      tokne: params[:tokne]
+    )
+  end
+
+  def pay_item
+    Payjs.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjs.Charge.create(
+      amount: order_params(:item_id[:@item.price])
+      card: order_params[:tokne]
+      currency: 'jpy'
     )
   end
 end
