@@ -35,7 +35,7 @@ class Orders
     house_number: house_number,
     postal_code: postal_code,
     phone_number: phone_number,
-    prefectures_id: prefectures.id
+    prefectures_id: prefectures.id,
     order_id: order.id)
 
   end
