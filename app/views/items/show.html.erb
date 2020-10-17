@@ -24,19 +24,15 @@
     </div>
 
   <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
-  <%# <% if user_signed_in? %>
-    <%# <% @items.each do |item| %>
-    <% if user_signed_in? && @item.user_id == current_user.id %>
-      <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
-      <p class='or-text'>or</p>
-      <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
-      <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <% elsif user_signed_in? && @item.user_id != current_user.id %>
-      <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
-      <%# //商品が売れていない場合はこちらを表示しましょう %>
-    <% end %>
-    <%# <% end %>
-  <%# <% end %>
+  <% if user_signed_in? && @item.user_id == current_user.id %>
+    <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
+    <p class='or-text'>or</p>
+    <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
+    <%# 商品が売れていない場合はこちらを表示しましょう %>
+  <% elsif user_signed_in? && @item.user_id != current_user.id %>
+    <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
+    <%# //商品が売れていない場合はこちらを表示しましょう %>
+  <% end %>
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
     <div class="item-explain-box">
