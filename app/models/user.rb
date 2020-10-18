@@ -23,4 +23,5 @@ class User < ApplicationRecord
   end
   
   has_many :items
+  has_one :user_item
 end

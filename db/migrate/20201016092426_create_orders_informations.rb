@@ -7,7 +7,7 @@ class CreateOrdersInformations < ActiveRecord::Migration[6.0]
       t.string     :postal_code,            null: false
       t.string     :phone_number,           null: false
       t.integer    :prefectures_id,         null: false
-      t.references :user_items,             foreign_key: true
+      t.references :user_item,             foreign_key: true
       t.timestamps
     end
   end

@@ -1,6 +1,6 @@
 class Orders
   include ActiveModel::Model
-  attr_accessor :user_id, :item_id, :prefectures_id, :municipality, :house_number, :building_number, :postal_code, :phone_number, :user_items_id, :token
+  attr_accessor :token, :user_id, :item_id, :prefectures_id, :municipality, :house_number, :building_number, :postal_code, :phone_number
 
   with_options presence: true do
     validates :municipality
@@ -25,9 +25,9 @@ class Orders
 
   def save
 
-    order = User_Items.create(
-    user_id: user.id, 
-    item_id: item.id)
+    order = UserItem.create(
+    user_id: user_id, 
+    item_id: item_id)
 
     OrdersInformation.create(
     municipality: municipality,
@@ -35,8 +35,9 @@ class Orders
     house_number: house_number,
     postal_code: postal_code,
     phone_number: phone_number,
-    prefectures_id: prefectures.id,
-    order_id: order.id)
+    prefectures_id: prefectures_id,
+    user_item_id: order.id)
+     
 
   end
 end

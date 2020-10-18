@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 2020_10_16_092426) do
     t.string "postal_code", null: false
     t.string "phone_number", null: false
     t.integer "prefectures_id", null: false
-    t.bigint "user_items_id"
+    t.bigint "user_item_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_items_id"], name: "index_orders_informations_on_user_items_id"
+    t.index ["user_item_id"], name: "index_orders_informations_on_user_item_id"
   end
 
   create_table "user_items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2020_10_16_092426) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "items", "users"
-  add_foreign_key "orders_informations", "user_items", column: "user_items_id"
+  add_foreign_key "orders_informations", "user_items"
   add_foreign_key "user_items", "items"
   add_foreign_key "user_items", "users"
 end
