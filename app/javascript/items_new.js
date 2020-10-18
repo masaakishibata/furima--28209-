@@ -10,4 +10,4 @@ function PriceInput () {
     PriceProfit.innerHTML = Math.ceil(data * 0.9)
   })
 };
-window.addEventListener('turbolinks:load', PriceInput)
+window.addEventListener('load', PriceInput)
