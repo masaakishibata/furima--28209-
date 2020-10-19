@@ -9,9 +9,11 @@
     <div class='item-img-content'>
       <%= image_tag @item.image ,class:"item-box-img" %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# <div class='sold-out'>
-        <span>Sold Out!!</span>
-      </div> %>
+        <% if @item.user_item%>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+        <% end %>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
@@ -32,6 +34,8 @@
   <% elsif user_signed_in? && @item.user_id != current_user.id %>
     <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
+  <% else %>
+    <%= link_to '購入画面に進む', user_session_path, class:"item-red-btn"%>
   <% end %>
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
