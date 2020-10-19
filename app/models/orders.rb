@@ -23,8 +23,6 @@ class Orders
     validates :prefectures_id
   end
 
-  # after_validation :after_pay
-
   def save
 
     order = UserItem.create(
@@ -42,17 +40,5 @@ class Orders
      
 
   end
-
-
-
-
-
-  # private
-
-  # def after_pay
-  #   if order.save
-  #     item_id: :delete
-  #   end
-  # end
 
 end
