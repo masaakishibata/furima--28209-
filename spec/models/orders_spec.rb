@@ -29,6 +29,11 @@ RSpec.describe Orders, type: :model do
       @order.valid?
       expect(@order.errors.full_messages).to include("Prefectures is not a number")
     end
+    it 'prefectureはother_than:1では保存できないこと' do
+      @order.prefectures_id = 1
+      @order.valid?
+      expect(@order.errors.full_messages).to include("Prefectures must be other than 1")
+    end
     it 'municipalityは空では保存できない' do
       @order.municipality = ""
       @order.valid?
