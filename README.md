@@ -40,7 +40,7 @@ Things you may want to cover:
 
 ### Association
 
-- has_many :user_items
+- has_one :user_items
 - has_many :items
 
 
@@ -74,8 +74,8 @@ Things you may want to cover:
 
 ### Association
 
-- belong_to :item
-- belong_to :user
+- belongs_to :item
+- belongs_to :user
 - has_one :orders_information
 
 
@@ -88,11 +88,11 @@ Things you may want to cover:
 | prefectures_id         | integer     | null: false                    |
 | municipality           | string      | null: false                    |
 | phone_number           | string      | null: false                    |
-| user_items             | references  | null: false, foreign_key: true |
+| user_item              | references  | null: false, foreign_key: true |
 
 
 
 ### Association
 
-- belongs_to :user_item
+- belongs_to :user_items
 

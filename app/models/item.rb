@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :transport_days
 
   belongs_to :user
+  has_one :user_item
   has_one_attached :image
 
   with_options presence: true do
