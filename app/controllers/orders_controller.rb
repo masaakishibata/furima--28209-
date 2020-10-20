@@ -2,15 +2,10 @@ class OrdersController < ApplicationController
   require 'payjp'
   before_action :new_order, only: [:index, :new]
   before_action :item_find, only: [:index, :create, :pay_item]
-
-
+  before_action :login_security, only: [:index]
+  before_action :authenticate_user!, only: [:index]
+  
   def index
-    if user_signed_in? && @item.user_id == current_user.id
-      redirect_to root_path
-    end
-    if @item.user_item
-      redirect_to root_path
-    end
   end
 
   def new
@@ -59,6 +54,14 @@ class OrdersController < ApplicationController
 
   def new_order
     @order = Orders.new
+  end
+
+  def login_security
+    if user_signed_in? && @item.user_id == current_user.id
+      redirect_to root_path
+    elsif @item.user_item.present?
+      redirect_to root_path
+    end
   end
 
 end

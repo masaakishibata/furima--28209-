@@ -45,16 +45,6 @@
       <%# end %>
       <% end %>
     <%# else ログインしていない %>
-    <% else %>
-      <%# if @item.user_item 商品が売れている new_user_session_path 表記：Soldout%>
-      <% if @item.user_item %>
-        <%= link_to 'sold-out', new_user_session_path, class:"item-red-btn"%>
-      <%# else 商品が売れていない new_user_session_path 表記：購入へ進む%>
-      <% else %>
-        <%= link_to '購入画面に進む', user_session_path, class:"item-red-btn"%>
-      <%# end %>
-      <% end %>
-    <%# end %>
     <% end %>
 
   <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
