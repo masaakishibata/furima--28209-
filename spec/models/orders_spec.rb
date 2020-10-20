@@ -8,7 +8,6 @@ RSpec.describe Orders, type: :model do
       item = FactoryBot.build(:item, user_id: seller.id)
       item.save
       @order = FactoryBot.build(:orders, item_id: item.id, user_id: buyer.id)
-      sleep(3)
     end
 
 
@@ -28,7 +27,7 @@ RSpec.describe Orders, type: :model do
     it 'prefectureを選択していないと保存できないこと' do
       @order.prefectures_id = ""
       @order.valid?
-      expect(@order.errors.full_messages).to include("Postal code Postal_code can't be blank", "Prefectures is not a number")
+      expect(@order.errors.full_messages).to include("Prefectures is not a number")
     end
     it 'municipalityは空では保存できない' do
       @order.municipality = ""
@@ -38,22 +37,22 @@ RSpec.describe Orders, type: :model do
     it 'house_numberは空では保存できない' do
       @order.house_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("House number can't be blank", "Postal code Postal_code can't be blank")
+      expect(@order.errors.full_messages).to  include("House number can't be blank")
     end
     it 'building_numberは空では保存できない' do
       @order.building_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Building number can't be blank", "Postal code Postal_code can't be blank")
+      expect(@order.errors.full_messages).to  include("Building number can't be blank")
     end
     it 'phone_numberは空では保存できない' do
       @order.phone_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Phone number can't be blank", "Phone number Phone_number can't be blank", "Postal code Postal_code can't be blank")
+      expect(@order.errors.full_messages).to  include("Phone number can't be blank", "Phone number Phone_number can't be blank")
     end
     it 'phone_numberはハイフンは不要で、11桁以内でないと保存できない' do
       @order.phone_number = "/\A\d{11}\z/"
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Postal code Postal_code can't be blank", "Phone number Phone_number can't be blank")
+      expect(@order.errors.full_messages).to  include("Phone number Phone_number can't be blank")
     end
     it 'tokenは空では保存できない' do
       @order.token = ""
