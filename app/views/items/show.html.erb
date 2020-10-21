@@ -28,21 +28,25 @@
     <%# if user_signed_in? ログインしている %>
     <% if user_signed_in? %>
       <%# if @item.user == current_user 出品者である %>
-      <% if @item.user_id == current_user.id %>
+      <% if @item.user_id == current_user.id && @item.user_item == nil%>
         <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
         <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
-      <%# else 購入者である %>
-      <% else %>
-        <%# if @item.user_item 商品が売れている root_path 表記：Soldout%>
+      <%# <%出品者で商品が売れている場合 %>
         <% if @item.user_item %>
           <%= link_to 'sold-out', root_path, class:"item-red-btn"%>
-        <%# else 商品が売れていない order 表記：購入へ進む%>
-        <% else %>
-          <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
-        <%# end %>
         <% end %>
-      <%# end %>
+      <%# else @item.user_item 購入者である %>
+      <% else %>
+          <%# if @item.user_item 商品が売れている root_path 表記：Soldout %>
+          <% if @item.user_item %>
+            <%= link_to 'sold-out', root_path, class:"item-red-btn"%>
+          <%# else 商品が売れていない order 表記：購入へ進む%>
+          <% else %>
+            <%= link_to '購入画面に進む', item_orders_path(@item.id), class:"item-red-btn"%>
+          <%# end %>
+          <% end %>
+        <%# end %>
       <% end %>
     <%# else ログインしていない %>
     <% end %>
