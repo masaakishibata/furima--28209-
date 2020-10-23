@@ -1,7 +1,7 @@
 #サーバ上でのアプリケーションコードが設置されているディレクトリを変数に入れておく
 app_path = File.expand_path('../../../', __FILE__)
-listen "#{app_path}/tmp/sockets/unicorn.sock"
-stderr_path "#{app_path}/log/unicorn.stderr.log"
+# listen "#{app_path}/tmp/sockets/unicorn.sock"
+# stderr_path "#{app_path}/log/unicorn.stderr.log"
 worker_processes 1
 
 #アプリケーションの設置されているディレクトリを指定
