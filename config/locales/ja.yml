@@ -23,3 +23,34 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %Z"
     am: "午前"
     pm: "午後"
+
+  activerecord:
+    attributes:
+      user:
+        nickname: ニックネーム
+        birthday: 誕生日
+        first_name: 苗字
+        last_name: 名前
+        first_name_kana: 苗字
+        last_name_kana: 名前
+      item:
+        name: 商品名
+        description: 商品説明
+        price: 価格
+        images: 画像
+        status_id: 商品の状態
+        category_id: 商品のカテゴリ-
+        delivery_charge_id: 送料の負担
+        shipment_source_id: 配送元
+        transport_days_id: 商品の配送期間
+
+  activemodel:
+    attributes:
+      orders:
+        municipality: 配送先の地域
+        house_number: 住所・番地
+        building_number: 建物名・部屋番号
+        postal_code: 郵便番号
+        phone_number: 電話番号
+        token: クレジットカード情報
+        prefectures_id: 都道府県
