@@ -8,13 +8,13 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one :user_item
-  has_one_attached :image
+  has_many_attached :images
 
   with_options presence: true do
     validates :name
     validates :description
     validates :price
-    validates :image
+    validates :images
   end
 
   with_options format: { with: /\A[0-9]+\z/, message: "Price can't be blank" } do

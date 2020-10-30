@@ -10,7 +10,7 @@
     <%= render 'shared/error_messages', model: f.object %>
 
     <%# 出品画像 %>
-    <div class="img-upload">
+    <div class="img-upload" id='images-list'>
       <div class="weight-bold-text">
         出品画像
         <span class="indispensable">必須</span>
@@ -19,7 +19,10 @@
         <p>
           クリックしてファイルをアップロード
         </p>
-        <%= f.file_field :image, id:"item-image" %>
+        <%= f.file_field :images, name: 'item[images][]', id:"item-image" %>
+        <% @item.images.each do |image| %>
+          <%= image_tag item.image, class: 'images' %>
+        <% end %>
       </div>
     </div>
     <%# /出品画像 %>
