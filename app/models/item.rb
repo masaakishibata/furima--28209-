@@ -17,12 +17,18 @@ class Item < ApplicationRecord
     validates :images
   end
 
-  with_options format: { with: /\A[0-9]+\z/, message: "Price can't be blank" } do
+  validates :price,
+    numericality: {
+    greater_than_or_equal_to: 300,
+    less_than: 9999999,
+    message: "は300円〜9,999,999円の間で入力してください。" 
+    }
+
+  with_options format: { with: /\A[0-9]+\z/, message: "は半角数字で入力してください。" } do
     validates :price
-    validates_inclusion_of :price, in: 300..999999
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: "を選択してください。" } do
     validates :status_id
     validates :category_id
     validates :delivery_charge_id

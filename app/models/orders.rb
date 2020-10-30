@@ -11,15 +11,15 @@ class Orders
     validates :token
   end
 
-  with_options format: { with: /\A\d{3}[-]\d{4}\z/, message: "Postal_code can't be blank" } do
+  with_options format: { with: /\A\d{3}[-]\d{4}\z/, message: "にはハイフンを含めてください。" } do
     validates :postal_code
   end
 
-  with_options format: { with: /\A\d{11}\z/, message: "Phone_number can't be blank" } do
+  with_options format: { with: /\A\d{11}\z/, message: "はハイフンを含まない11以内で入力をしてください。" } do
     validates :phone_number
   end
 
-  with_options numericality: { other_than: 1 } do
+  with_options numericality: { other_than: 1, message: "を選択してください。" } do
     validates :prefectures_id
   end
 

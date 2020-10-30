@@ -14,55 +14,55 @@ RSpec.describe Orders, type: :model do
     it 'すべての値が正しく入力されていれば保存できること' do
       expect(@order).to be_valid
     end
-    it 'postal_codeが空だと保存できないこと' do
+    it '郵便番号がないと保存できない' do
       @order.postal_code = ""
       @order.valid?
-      expect(@order.errors.full_messages).to include("Postal code can't be blank")
+      expect(@order.errors.full_messages).to include("郵便番号を入力してください", "郵便番号にはハイフンを含めてください。")
     end
-    it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+    it '郵便番号が半角のハイフンを含んだ正しい形式でないと保存できない' do
       @order.postal_code = "/\A\d{3}[-]\d{4}\z/"
       @order.valid?
-      expect(@order.errors.full_messages).to include("Postal code Postal_code can't be blank")
+      expect(@order.errors.full_messages).to include("郵便番号にはハイフンを含めてください。")
     end
-    it 'prefectureを選択していないと保存できないこと' do
+    it '都道府県を選択していないと保存できないこと' do
       @order.prefectures_id = ""
       @order.valid?
-      expect(@order.errors.full_messages).to include("Prefectures is not a number")
+      expect(@order.errors.full_messages).to include("都道府県を選択してください。")
     end
-    it 'prefectureはother_than:1では保存できないこと' do
+    it '都道府県はother_than:1では保存できないこと' do
       @order.prefectures_id = 1
       @order.valid?
-      expect(@order.errors.full_messages).to include("Prefectures must be other than 1")
+      expect(@order.errors.full_messages).to include("都道府県を選択してください。")
     end
-    it 'municipalityは空では保存できない' do
+    it '市区町村を入力しないと保存できない' do
       @order.municipality = ""
       @order.valid?
-      expect(@order.errors.full_messages).to include("Municipality can't be blank")
+      expect(@order.errors.full_messages).to include("配送先の地域を入力してください")
     end
-    it 'house_numberは空では保存できない' do
+    it '住所・番地を入力しないと保存できない' do
       @order.house_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("House number can't be blank")
+      expect(@order.errors.full_messages).to  include("住所・番地を入力してください")
     end
-    it 'building_numberは空では保存できない' do
+    it '建物名・部屋番号を入力しないと保存できない' do
       @order.building_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Building number can't be blank")
+      expect(@order.errors.full_messages).to  include("建物名・部屋番号を入力してください")
     end
-    it 'phone_numberは空では保存できない' do
+    it '電話番号を入力しないと保存できない' do
       @order.phone_number = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Phone number can't be blank", "Phone number Phone_number can't be blank")
+      expect(@order.errors.full_messages).to  include("電話番号を入力してください", "電話番号はハイフンを含まない11以内で入力をしてください。")
     end
-    it 'phone_numberはハイフンは不要で、11桁以内でないと保存できない' do
+    it '電話番号はハイフンは不要で、11桁以内でないと保存できない' do
       @order.phone_number = "/\A\d{11}\z/"
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Phone number Phone_number can't be blank")
+      expect(@order.errors.full_messages).to  include("電話番号はハイフンを含まない11以内で入力をしてください。")
     end
-    it 'tokenは空では保存できない' do
+    it 'クレジットカード情報を入力しないと保存できない(token)' do
       @order.token = ""
       @order.valid?
-      expect(@order.errors.full_messages).to  include("Token can't be blank")
+      expect(@order.errors.full_messages).to  include("クレジットカード情報を入力してください")
     end
   end
 end
