@@ -1,7 +1,6 @@
 if (document.URL.match( /new/ ) || document.URL.match( /edit/ )) {
   document.addEventListener('DOMContentLoaded', function(){
     const ItemImages = document.getElementById('images-list');
-    console.log(ItemImages)
     
     const createImageHTML = (blob) => {
       const imageElement = document.createElement('div');
