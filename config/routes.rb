@@ -4,5 +4,8 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   resources :items, only: [:index, :new, :create, :show, :edit, :destroy, :update] do
     resources :orders, only:[:index, :create, :new,]
+    collection do
+      get 'search'
+    end
   end
 end

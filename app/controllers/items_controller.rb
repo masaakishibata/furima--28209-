@@ -5,11 +5,11 @@ class ItemsController < ApplicationController
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
 
   def index
-    @items = Item.order("created_at DESC")
+    @items = Item.all.order("created_at DESC")
   end
 
   def new
-    @item = Item.new
+    @item = ItemTags.new
   end
   
   def create
@@ -38,11 +38,18 @@ class ItemsController < ApplicationController
     end
   end
 
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['tagname LIKE ?', "%#{params[:keyword]}%"])
+    binding.pry
+    render json:{ keyword: tag }
+  end
   
   private
   
   def item_params
-    params.require(:item).permit(
+    params.require(:item_tags).permit(
       :name,
       :description,
       :price,
@@ -51,8 +58,12 @@ class ItemsController < ApplicationController
       :delivery_charge_id,
       :shipment_source_id,
       :transport_days_id,
+      :tagname,
       :content, images: []
-    ).merge(user_id: current_user.id)
+    ).merge(
+      user_id: current_user.id,
+      tag_id: tag.id,
+      )
   end
 
   def move_to_index
@@ -72,7 +83,7 @@ class ItemsController < ApplicationController
   end
 
   def item_create
-    @item = Item.new(item_params)
+    @item = ItemTags.new(item_params)
     if @item.valid?
       @item.save
       redirect_to root_path
