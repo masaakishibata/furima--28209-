@@ -63,6 +63,7 @@ Things you may want to cover:
 
 - has_one :user_item
 - belong_to :user
+- has_many_attached :images
 
 
 ## user_items テーブル

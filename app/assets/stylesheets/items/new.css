@@ -46,6 +46,20 @@
   margin-bottom: 10px;
 }
 
+.item-tags {
+  display: flex;
+  font-weight: bold;
+  min-width: 100px;
+  margin-bottom: 10px
+}
+
+.tags-search {
+  display: flex;
+  font-weight: bold;
+  min-width: 100px;
+  margin-bottom: 10px
+}
+
 .select-box {
   height: 30px;
   width: 100%;

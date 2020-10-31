@@ -35,6 +35,14 @@ app/assets/stylesheets/items/new.css %>
         <span class="indispensable">必須</span>
       </div>
       <%= f.text_area :name, class:"items-text", id:"item-name", placeholder:"商品名（必須 40文字まで)", maxlength:"40" %>
+      <div class="item-tags">
+        <%= f.label :name, "タグ検索" %>
+        <%= f.text_area :tagname, class:"item-tag", id:"item-tags", placeholder:"商品のタグ付け", maxlength:"20"%>
+        <div class="tags-search">
+        <%= f.label :name, "タグ結果" %>
+        <%= f.text_area :tagname, class:"item-tags-search", id:"search-result",placeholder:"タグ検索結果", maxlength:"20"%>
+        </div>
+      </div>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
