@@ -3,10 +3,14 @@ class ItemsController < ApplicationController
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
+  before_action :search_item, only: [:index, :search]
 
   def index
     @items = Item.all.order("created_at DESC")
+    set_item_column
   end
+
+
 
   def new
     @item = ItemTags.new
@@ -40,6 +44,7 @@ class ItemsController < ApplicationController
 
 
   def search
+    @results = @p.result.includes(:category, :status, :delivery_charge, :shipment_source, :transport_days)
     return nil if params[:keyword] == ""
     tag = Tag.where(['tagname LIKE ?', "%#{params[:keyword]}%"])
     binding.pry
@@ -92,4 +97,20 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search_item
+    @p = Item.ransack(params[:q])
+  end
+
+  def set_item_column
+    @item_name = Item.select("name").distinct
+    @item_price = Item.select("price").distinct
+    @item_description = Item.select("description").distinct
+    @item_status_id = Item.select("status_id").distinct
+    @item_category_id = Item.select("category_id").distinct
+    @item_delivery_charge_id = Item.select("delivery_charge_id").distinct
+    @item_shipment_source_id = Item.select("shipment_source_id").distinct
+    @item_transport_days_id = Item.select("transport_days_id").distinct
+    @item_tagname = Item.select("tagname").distinct
+  end
+  
 end
