@@ -48,7 +48,7 @@ class ItemTags
       price: price,
       images: images,
       status_id: status_id,
-      ategory_id: ategory_id,
+      category_id: category_id,
       delivery_charge_id: delivery_charge_id,
       shipment_source_id: shipment_source_id,
       transport_days_id: transport_days_id,
@@ -61,4 +61,28 @@ class ItemTags
       item_id: item.id,
       tag_id: tag.id)
   end
+
+  def update(params, item)
+  
+    tag_name = params.delete(:tagname)
+    tag_id = params.delete(:tag_id)
+    
+    item.update(params)
+
+      tag = Tag.where(tagname: tagname).first_or_initialize
+      tag.save
+
+    ItemTagRelation.update(
+      item_id: item_id,
+      tag_id: tag_id)
+    
+
+  end
+
+
+  # def self.saerch(saerch)
+  #   return Post.all unless saerch
+  #   Post.where(['content LIKE ?', "%#{saerch}%"])
+  # end
+
 end

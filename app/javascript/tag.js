@@ -18,7 +18,7 @@ if (location.pathname.match("items/new") || ("items/item.id/edit")){
             childElement.setAttribute("id", tag.id);
             childElement.innerHTML = tag.tagname;
             searchResult.appendChild(childElement);
-            const clickElement = document.getElementById(tag.id);
+            const clickElement = document.getElementById('tagname');
             clickElement.addEventListener("click", () => {
               inputElement.value = clickElement.textContent;
               clickElement.remove();

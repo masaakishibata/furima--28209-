@@ -1,24 +1,15 @@
 <%# CSS・・・assets/stylesheets/shared/header.css %>
 <header class='top-page-header'>
   <div class='search-bar-contents'>
-    <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "/" %>
-    <%= search_from_for @p, url: search_items_path do |f| %>
-      <form class="search-form" action="#">
+    <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "items/show" %>
+      <form @p url: saerch_item_path, :method get, class="search-form" action="items/saerch">
         <input class='input-box' placeholder='キーワードから探す'>
-        <%= f. collection_select :name_cont, @items_name, :name, :name, include_blank: '指定なし' %>
-        <%= f. collection_select :price_cont, @items_price, :price, :price, include_blank: '指定なし' %>
-        <%= f. collection_select :description_cont, @items_description, :description, :description, include_blank: '指定なし' %>
-        <%= f. collection_select :status_id_cont, @items_status_id, :status_id, :status_id, include_blank: '指定なし' %>
-        <%= f. collection_select :category_id_cont, @items_category_id, :category_id, :category_id, include_blank: '指定なし' %>
-        <%= f. collection_select :delivery_charge_id_cont, @items_delivery_charge_id, :delivery_charge_id, :delivery_charge_id, include_blank: '指定なし' %>
-        <%= f. collection_select :shipment_source_id_cont, @items_shipment_source_id, :shipment_source_id, :shipment_source_id, include_blank: '指定なし' %>
-        <%= f. collection_select :transport_days_id_cont, @items_transport_days_id, :transport_days_id, :transport_days_id, include_blank: '指定なし' %>
-        <%= f. collection_select :tagname_cont, @items_tagname, :tagname, :tagname, include_blank: '指定なし' %>
         <button class="search-button">
-          <%= image_tag "search.png", class:"search-icon" %>
+          <a herf="/items/show">
+            <%= image_tag "search.png", class:"search-icon" %>
+          </a>
         </button>
       </form>
-    <% end %>
   </div>
   <div class='nav'>
     <ul class='lists-left'>
