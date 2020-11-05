@@ -1,14 +1,14 @@
 class ItemsController < ApplicationController
-  # before_action :item_params, [:new, :show, :index, :edit, :create, :update, :destroy, :search]
   before_action :move_to_index, except: [:index, :show]
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
-  # before_action :search_item, only: [:index, :search]
+  before_action :search_items, only: [:index, :search, :item_search]
 
   def index
     @items = Item.all.order("created_at DESC")
-    # set_item_column
+    @search_items = Item.all
+    set_item_column
   end
 
   def new
@@ -43,9 +43,13 @@ class ItemsController < ApplicationController
   end
 
 
+  def item_search
+    @posts = Item.search(params[:search])
+    @items = @p.result
+    render :index
+  end
+
   def search
-    # @posts = Post.search(params[:search])
-    # @results = @p.result.includes(:name, :description, :category, :status, :delivery_charge, :shipment_source, :transport_days, :tagname)
     return nil if params[:keyword] == ""
     tag = Tag.where(['tagname LIKE ?', "%#{params[:keyword]}%"])
     render json:{ keyword: tag }
@@ -99,20 +103,14 @@ class ItemsController < ApplicationController
     end
   end
 
-  # def search_item
-  #   @p = ItemTags.ransack(params[:q])
-  # end
+  def search_items
+    @p = Item.ransack(params[:q])
+  end
 
-  # def set_item_column
-  #   @item_name = Item.select("name").distinct
-  #   @item_price = Item.select("price").distinct
-  #   @item_description = Item.select("description").distinct
-  #   @item_status_id = Item.select("status_id").distinct
-  #   @item_category_id = Item.select("category_id").distinct
-  #   @item_delivery_charge_id = Item.select("delivery_charge_id").distinct
-  #   @item_shipment_source_id = Item.select("shipment_source_id").distinct
-  #   @item_transport_days_id = Item.select("transport_days_id").distinct
-  #   @item_tagname = Item.select("tagname").distinct
-  # end
+
+
+  def set_item_column
+    @item_name = Item.select("name").distinct
+  end
   
 end
