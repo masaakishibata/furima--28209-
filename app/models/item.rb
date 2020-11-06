@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one :user_item
   has_many_attached :images
-  has_many :item_tag_relations
+  has_many :item_tag_relations, dependent: :destroy
   has_many :tags, through: :item_tag_relations
   
 end

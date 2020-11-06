@@ -46,14 +46,28 @@
   margin-bottom: 10px;
 }
 
-.item-tags {
+.item-tag {
   display: flex;
   font-weight: bold;
   min-width: 100px;
   margin-bottom: 10px
 }
 
-.tags-search {
+.item-tags-search {
+  display: flex;
+  font-weight: bold;
+  min-width: 100px;
+  margin-bottom: 10px
+}
+
+.item-tags-search {
+  display: flex;
+  font-weight: bold;
+  min-width: 100px;
+  margin-bottom: 10px
+}
+
+.child {
   display: flex;
   font-weight: bold;
   min-width: 100px;

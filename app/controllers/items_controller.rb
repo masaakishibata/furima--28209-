@@ -3,13 +3,16 @@ class ItemsController < ApplicationController
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
+  before_action :search_items, only: [:index, :item_search, :show]
 
   def index
     @items = Item.all.order("created_at DESC")
+    @search_items = Item.all
+    set_item_column
   end
 
   def new
-    @item = ItemTags.new
+    @item = Item.new
   end
   
   def create
@@ -31,7 +34,8 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    @item_tag = ItemTags.new(item_params)
+    if @item_tag.update(item_params, @item)
       redirect_to root_path
     else
       render :edit
@@ -39,17 +43,23 @@ class ItemsController < ApplicationController
   end
 
 
+  def item_search
+    @posts = Item.search(params[:search])
+    @items = @p.result.includes(:user)
+    Item.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render :item_search
+  end
+
   def search
     return nil if params[:keyword] == ""
     tag = Tag.where(['tagname LIKE ?', "%#{params[:keyword]}%"])
-    binding.pry
     render json:{ keyword: tag }
   end
   
   private
   
   def item_params
-    params.require(:item_tags).permit(
+    params.require(:item).permit(
       :name,
       :description,
       :price,
@@ -59,11 +69,11 @@ class ItemsController < ApplicationController
       :shipment_source_id,
       :transport_days_id,
       :tagname,
-      :content, images: []
+      images: []
     ).merge(
       user_id: current_user.id,
-      tag_id: tag.id,
-      )
+      tag_id: params[:tagname]
+    )
   end
 
   def move_to_index
@@ -82,6 +92,8 @@ class ItemsController < ApplicationController
     @item = Item.find(params[:id])
   end
 
+
+
   def item_create
     @item = ItemTags.new(item_params)
     if @item.valid?
@@ -92,4 +104,14 @@ class ItemsController < ApplicationController
     end
   end
 
+  def search_items
+    @p = Item.ransack(params[:q])
+  end
+
+
+
+  def set_item_column
+    @item_name = Item.select("name").distinct
+  end
+  
 end
