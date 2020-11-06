@@ -81,6 +81,19 @@
   align-items: flex-end;
 }
 
+.p-lists {
+  text-decoration: none;
+  margin-right: 3vw;
+  color: #333333;
+  font-weight: bold;
+}
+
+.p-list {
+  text-decoration: none;
+  margin-right: 1vw;
+  color: #333333;
+  font-weight: bold;
+}
 
 .user-nickname {
   text-decoration: none;

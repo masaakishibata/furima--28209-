@@ -1,3 +1,8 @@
 <header class='second-header'>
   <%= link_to image_tag("furima-logo-color.png", class:"second-logo"), "/" %>
+  <ul>
+    <div class="p-lists"><li>FURIMA/商品詳細ページ/商品購入ページ</li></div>
+    <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+    <% breadcrumb :item %>
+  </ul>
 </header>

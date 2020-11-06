@@ -79,6 +79,12 @@ class ItemTags
 
   end
 
+  def request_path
+    @path = controller_path + '#' + action_name
+    def @path.is(*str)
+        str.map{|s| self.include?(s)}.include?(true)
+    end
+  end
 
   # def self.saerch(saerch)
   #   return Post.all unless saerch
