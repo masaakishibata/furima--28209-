@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
-  before_action :search_items, only: [:index, :search, :item_search]
+  before_action :search_items, only: [:index, :item_search, :show]
 
   def index
     @items = Item.all.order("created_at DESC")
@@ -45,8 +45,9 @@ class ItemsController < ApplicationController
 
   def item_search
     @posts = Item.search(params[:search])
-    @items = @p.result
-    render :index
+    @items = @p.result.includes(:user)
+    Item.where(['name LIKE ?', "%#{params[:keyword]}%"])
+    render :item_search
   end
 
   def search

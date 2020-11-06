@@ -1,17 +1,15 @@
 <%# CSS・・・assets/stylesheets/shared/header.css %>
 <header class='top-page-header'>
   <div class='search-bar-contents'>
-    <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "items/index" %>
+    <%= link_to image_tag("furima-logo-color.png", class:"furima-icon"), "#" %>
     <div class="search-bar-contents">
-      <div class="search-form">
-        <%= search_form_for(@p, url: item_search_items_path) do |f| %>
-        <div class='input-box'>
-          <%= f.search_field :name_cont, placeholder:'キーワードから探す'%>
-        </div>
-          <%= f.submit class:"search-button"%>
+      <%= search_form_for(@p, url: item_search_items_path, class: "search-form") do |f| %>
+          <%= f.search_field :name_cont, placeholder: 'キーワードから探す', class: 'input-box' %>
+          <button class="search-button">
+            <%= f.submit class:"submit-button"%>
             <%= image_tag "search.png", class:"search-icon" %>
-        <% end %>
-      </div>
+          </button>
+      <% end %>
     </div>
   </div>
   <div class='nav'>
