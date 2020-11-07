@@ -18,6 +18,20 @@
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
     <ul class='lists-right'>
+    <% if @path.is('items#index') %>
+      <div class="p-lists"><li>FURIMA/トップページ</li></div>
+      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+    <% end %>
+    <% if @path.is('/items/:id', 'items#show') %>
+      <div class="p-lists"><li>FURIMA/商品詳細ページ</li></div>
+      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+      <% breadcrumb :root %>
+    <% end %>
+    <% if @path.is('/items/item_search','items#item_search') %>
+      <div class="p-lists"><li>FURIMA/検索商品ページ</li></div>
+      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+      <% breadcrumb :root %>
+    <% end %>
       <% if user_signed_in? %>
           <li><%= link_to current_user.nickname, user_registration_path, class: "user-nickname" %></li> 
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>

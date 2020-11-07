@@ -16,6 +16,20 @@
   text-align: center;
 }
 
+.p-lists {
+  text-decoration: none;
+  margin-right: 3vw;
+  color: #333333;
+  font-weight: bold;
+}
+
+.p-list {
+  text-decoration: none;
+  margin-right: 1vw;
+  color: #333333;
+  font-weight: bold;
+}
+
 .items-sell-main {
   background-color: #FFF;
   width: 70vw;

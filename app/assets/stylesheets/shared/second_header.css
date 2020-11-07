@@ -11,4 +11,19 @@
 .second-logo {
   width: 185px;
   height: 49px;
+  margin: 50px;
+}
+
+.p-lists {
+  text-decoration: none;
+  margin-right: 3vw;
+  color: #333333;
+  font-weight: bold;
+}
+
+.p-list {
+  text-decoration: none;
+  margin-right: 1vw;
+  color: #333333;
+  font-weight: bold;
 }

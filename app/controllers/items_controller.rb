@@ -1,14 +1,18 @@
 class ItemsController < ApplicationController
+  before_action :request_path, only: [:index, :show, :search_items, :item_search]
   before_action :move_to_index, except: [:index, :show]
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]
   before_action :ensure_current_user, only: [:create, :edit, :destroy]
-  before_action :search_items, only: [:index, :item_search, :show]
+  before_action :search_items, only: [:index, :item_search, :show, :request_path]
+  before_action :item_search, only: [:index, :item_search, :request_path]
 
   def index
     @items = Item.all.order("created_at DESC")
     @search_items = Item.all
     set_item_column
+    request_path
+    item_search
   end
 
   def new
@@ -114,4 +118,12 @@ class ItemsController < ApplicationController
     @item_name = Item.select("name").distinct
   end
   
+
+  def request_path
+    @path = controller_path + '#' + action_name
+    def @path.is(*str)
+        str.map{|s| self.include?(s)}.include?(true)
+    end
+  end
+
 end
