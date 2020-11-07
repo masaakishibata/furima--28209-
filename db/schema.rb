@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_31_070722) do
+ActiveRecord::Schema.define(version: 2020_11_07_101537) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -70,6 +70,15 @@ ActiveRecord::Schema.define(version: 2020_10_31_070722) do
     t.index ["user_item_id"], name: "index_orders_informations_on_user_item_id"
   end
 
+  create_table "sns_credentials", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "provider"
+    t.string "uid"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_sns_credentials_on_user_id"
+  end
+
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "tagname", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -109,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_10_31_070722) do
   add_foreign_key "item_tag_relations", "tags"
   add_foreign_key "items", "users"
   add_foreign_key "orders_informations", "user_items"
+  add_foreign_key "sns_credentials", "users"
   add_foreign_key "user_items", "items"
   add_foreign_key "user_items", "users"
 end

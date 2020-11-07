@@ -61,7 +61,6 @@
 .lists-left {
   display: flex;
   min-width: 200px;
-
 }
 
 .category-list {
@@ -72,27 +71,33 @@
 
 .brand-list {
   text-decoration: none;
+  margin-right: 3vw;
   color: #333333;
+}
+
+.p-lists {
+  text-decoration: none;
+  margin-right: 40vw;
+  color: #333333;
+  position: absolute;
+  top: 12vh;
+  left: 15vw;
+  border-bottom: 1px solid red;
+}
+
+.p-list {
+  text-decoration: none;
+  margin-right: 40vw;
+  color: #333333;
+  position: absolute;
+  top: 12vh;
+  left: 30vw;
+  border-bottom: 1px solid red;
 }
 
 .lists-right {
   display: flex;
   list-style: none;
-  align-items: flex-end;
-}
-
-.p-lists {
-  text-decoration: none;
-  margin-right: 3vw;
-  color: #333333;
-  font-weight: bold;
-}
-
-.p-list {
-  text-decoration: none;
-  margin-right: 1vw;
-  color: #333333;
-  font-weight: bold;
 }
 
 .user-nickname {
@@ -113,9 +118,57 @@
   line-height: 32px;
   margin-right: 3vw;
   color: #333333;
+  border-bottom: 1px solid green;
+  position: absolute;
+  top: 12vh;
+  right: 38vw;
+}
+
+.login1 {
+  text-decoration: none;
+  line-height: 32px;
+  margin-right: 3vw;
+  color: #333333;
+  border-bottom: 1px solid green;
+  position: absolute;
+  top: 12vh;
+  right: 23vw;
+}
+
+.login2 {
+  text-decoration: none;
+  line-height: 32px;
+  margin-right: 3vw;
+  color: #333333;
+  border-bottom: 1px solid green;
+  position: absolute;
+  top: 12vh;
+  right: 10vw;
 }
 
 .sign-up {
   text-decoration: none;
+  line-height: 32px;
+  margin-right: 5vw;
+  margin-top: 10vh;
   color: #333333;
+  border-bottom: 1px solid blue;
+}
+
+.sign-up1 {
+  text-decoration: none;
+  line-height: 32px;
+  margin-right: 5vw;
+  margin-top: 10vh;
+  color: #333333;
+  border-bottom: 1px solid blue;
+}
+
+.sign-up2 {
+  text-decoration: none;
+  line-height: 32px;
+  margin-right: 1px;
+  margin-top: 1vh;
+  color: #333333;
+  border-bottom: 1px solid blue;
 }

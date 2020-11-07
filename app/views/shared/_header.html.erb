@@ -16,28 +16,32 @@
     <ul class='lists-left'>
       <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
       <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
+      <% if @path.is('items#index') %>
+        <div class="p-lists"><li>FURIMA/トップページ</li></div>
+        <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+      <% end %>
+      <% if @path.is('/items/:id', 'items#show') %>
+        <div class="p-lists"><li>FURIMA/商品詳細ページ</li></div>
+        <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+        <% breadcrumb :root %>
+      <% end %>
+      <% if @path.is('/items/item_search','items#item_search') %>
+        <div class="p-lists"><li>FURIMA/検索商品ページ</li></div>
+        <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
+        <% breadcrumb :root %>
+      <% end %>
     </ul>
     <ul class='lists-right'>
-    <% if @path.is('items#index') %>
-      <div class="p-lists"><li>FURIMA/トップページ</li></div>
-      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
-    <% end %>
-    <% if @path.is('/items/:id', 'items#show') %>
-      <div class="p-lists"><li>FURIMA/商品詳細ページ</li></div>
-      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
-      <% breadcrumb :root %>
-    <% end %>
-    <% if @path.is('/items/item_search','items#item_search') %>
-      <div class="p-lists"><li>FURIMA/検索商品ページ</li></div>
-      <div class="p-list"><p><%= link_to "商品一覧", root_path %></p></div>
-      <% breadcrumb :root %>
-    <% end %>
       <% if user_signed_in? %>
           <li><%= link_to current_user.nickname, user_registration_path, class: "user-nickname" %></li> 
           <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: "logout" %></li>
         <% else %>
           <li><%= link_to 'ログイン', user_session_path, class: "login"%></li>
+          <li><%= link_to 'Facebookでログイン', user_facebook_omniauth_authorize_path, method: :post, class: "login1"%></li>
+          <li><%= link_to 'Googleでログイン', user_google_oauth2_omniauth_authorize_path, method: :post, class: "login2"%></li>
           <li><%= link_to '新規登録', new_user_registration_path, class: "sign-up" %></li>
+          <li><%= link_to 'Facebookで登録', user_facebook_omniauth_authorize_path, method: :post, class: "sign-up1"%></li>
+          <li><%= link_to 'Googleで登録', user_google_oauth2_omniauth_authorize_path, method: :post, class: "sign-up2"%></li>
         <% end %>
     </ul>
   </div>
