@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :request_path, only: [:index, :show, :search_items]
+  before_action :request_path, only: [:index, :show, :search_items, :item_search]
   before_action :move_to_index, except: [:index, :show]
   before_action :item_create, only: [:create]
   before_action :item_find, only: [:create, :show, :edit, :update, :ensure_current_user, :destroy]

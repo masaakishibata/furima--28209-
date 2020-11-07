@@ -11,5 +11,7 @@ class Item < ApplicationRecord
   has_many_attached :images
   has_many :item_tag_relations, dependent: :destroy
   has_many :tags, through: :item_tag_relations
+
+  
   
 end
