@@ -87,18 +87,6 @@
   </div>
   <%if @sns_id.present? %>
     <%= hidden_field_tag :sns_auth, true %>
-  <% else %>
-    <div class="field">
-      <%= f.label :password %>
-      <% @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <br />
-      <%= f.password_field :password, autocomplete: "new-password", class:"input-default" %>
-    </div>
-    <div class="field">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"input-default" %>
-    </div>
   <% end %>
   <div class="form-group">
     <h2 class='form-bottom-text'>
