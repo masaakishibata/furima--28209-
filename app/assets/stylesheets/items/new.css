@@ -255,6 +255,8 @@
 
 .items-sell-footer {
   background-color: #f5f5f5;
+  overflow: scroll;
+  margin-right: 30vw;
   width: 60vw;
   padding: 3ch 0;
   display: flex;
