@@ -42,6 +42,7 @@ Things you may want to cover:
 
 - has_one :user_items
 - has_many :items
+- has_many :sns_credentials
 
 
 ## items テーブル
@@ -64,6 +65,8 @@ Things you may want to cover:
 - has_one :user_item
 - belong_to :user
 - has_many_attached :images
+- has_many :item_tag_relations, dependent: :destroy
+- has_many :tags, through: :item_tag_relations
 
 
 ## user_items テーブル
@@ -96,4 +99,39 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user_items
+
+## tags テーブル
+
+| Column  | Type    | Options     |
+| ------- | ------- | ----------- |
+| tagname | string  | null: false |
+
+### Association
+
+- has_many :item_tag_relations
+- has_many :items, through: :item_tag_relations
+
+## item_tag_relations テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| tag     | references | null: false, foreign_key: true |
+| user    | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :item
+- belongs_to :tag
+
+## sns_credentials テーブル
+
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| provider| string     | null: false                    |
+| uid     | string     | null: false                    |
+| user    | references | null                           |
+
+### Association
+
+- belongs_to :user, optional: true
 
