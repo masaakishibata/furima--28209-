@@ -43,6 +43,7 @@ Things you may want to cover:
 - has_one :user_items
 - has_many :items
 - has_many :sns_credentials
+- has_many :comments
 
 
 ## items テーブル
@@ -67,6 +68,7 @@ Things you may want to cover:
 - has_many_attached :images
 - has_many :item_tag_relations, dependent: :destroy
 - has_many :tags, through: :item_tag_relations
+- has_many :comments
 
 
 ## user_items テーブル
@@ -135,3 +137,15 @@ Things you may want to cover:
 
 - belongs_to :user, optional: true
 
+## comments テーブル
+
+| Column  | Type    | Options                        |
+| ------- | ------- | ------------------------------ |
+| text    | text    | null: false                    |
+| user_id | integer | null: false                    |
+| item_id | integer | null: false                    |
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
