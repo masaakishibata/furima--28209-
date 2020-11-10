@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'items#index'
   resources :users, only: [:create]
   resources :items, only: [:index, :new, :create, :show, :edit, :destroy, :update] do
+    resources :comments, only:[:create, :new]
     resources :orders, only:[:index, :create, :new,]
     collection do
       get 'item_search'

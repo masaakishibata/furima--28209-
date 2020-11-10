@@ -12,6 +12,7 @@ module Furima28209
     config.load_defaults 6.0
     # config.i18n.available_locales = %i[ja en]
     config.i18n.default_locale = :ja
+    config.time_zone = 'Tokyo'
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration can go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded after loading
