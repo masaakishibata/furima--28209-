@@ -165,7 +165,8 @@
 }
 
 .comments {
-  margin-right: 20vw;
+  align-items: flex-start;
+  border-bottom: 1px solid green;
 }
 
 .comment-warn {

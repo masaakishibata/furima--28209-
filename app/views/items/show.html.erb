@@ -124,14 +124,15 @@
           <br>
           不快な言葉遣いなどは利用制限や退会処分となることがあります。
         </p>
-        <span>コメントする<span>
+        <span>コメントBOX<span>
         <div class="comment-result" id='comments'>
           <% if @comments %>
             <% @comments.reverse_each do |comment| %>
               <div class="comments">
                 <p>
                   <%= l comment.created_at %>
-                  <strong>:<%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+                  <br>
+                  <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
                   <%= comment.text %>
                 </p>
               </div>
