@@ -155,6 +155,19 @@
   resize: none;
 }
 
+.comment-result {
+  overflow: scroll;
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  border: solid 2px #dedede;
+  resize: none;
+}
+
+.comments {
+  margin-right: 20vw;
+}
+
 .comment-warn {
   padding: 10px;
   font-size: 14px;
