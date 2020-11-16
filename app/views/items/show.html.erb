@@ -132,7 +132,7 @@
                   <p>
                     <%= l comment.created_at %>
                     <br>
-                    <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+                    <strong><%= link_to current_user.nickname, root_path %>：</strong>
                     <%= comment.text %>
                   </p>
                 </div>
