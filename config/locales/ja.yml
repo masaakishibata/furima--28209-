@@ -67,3 +67,9 @@ ja:
         delivery_charge_id: 送料の負担
         shipment_source_id: 配送元
         transport_days_id: 商品の配送期間
+  activemodel:
+    errors:
+      models:
+        item_tags:
+          attributes:
+            name: 商品名
