@@ -6,12 +6,14 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(text: params[:comment] [:text] )
+    @comment = Comment.new(comment_params)
+    # binding.pry
     if @comment.save
-      ActionCable.server.broadcast 'comment_channel', content: @comment
+      @user = @comment.user
+      ActionCable.server.broadcast 'comment_channel', content: @comment, user: @user
     end
-    comment = Comment.create(comment_params)
-    redirect_to "/items/#{comment.item.id}"
+    # comment = Comment.create(comment_params)
+    # redirect_to "/items/#{comment.item.id}"
   end
 
   private
